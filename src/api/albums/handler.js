@@ -1,4 +1,5 @@
 const ClientError = require('../../exceptions/ClientError');
+const NotFoundError = require('../../exceptions/NotFoundError');
 
 class AlbumHandler {
     constructor(service, validator) {
@@ -99,7 +100,7 @@ class AlbumHandler {
      
             return {
                 status: 'success',
-                message: 'Catatan berhasil diperbarui',
+                message: 'Album berhasil diperbarui',
             };
         } catch (error) {
             if (error instanceof ClientError) {
@@ -122,10 +123,11 @@ class AlbumHandler {
         }
     }
 
-    async deleteNoteByIdHandler(request, h) {
+    async deleteAlbumByIdHandler(request, h) {
         try {
           const { id } = request.params;
-          await this._service.deleteNoteById(id);
+          const album = await this._service.getAlbumById(id);
+          await this._service.deleteAlbumById(id);
           return {
             status: 'success',
             message: 'Catatan berhasil dihapus',
@@ -152,4 +154,4 @@ class AlbumHandler {
     }
 }
 
-module.exports = NotesHandler;
+module.exports = AlbumHandler;

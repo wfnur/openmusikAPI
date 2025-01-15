@@ -16,7 +16,7 @@ class AlbumServices {
         const updatedAt = createdAt;
 
         const query = {
-            text: 'INSERT INTO albums VALUES($1, $2, $3, $4, $5, $6) RETURNING id',
+            text: 'INSERT INTO albums VALUES($1, $2, $3, $4, $5) RETURNING id',
             values: [id, name, year , createdAt, updatedAt],
         };
 
@@ -64,7 +64,7 @@ class AlbumServices {
 
     async deleteAlbumById(id) {
         const query = {
-          text: 'DELETE FROM albums WHERE id = $1 RETURNING id',
+          text: 'DELETE FROM albums WHERE id = $1',
           values: [id],
         };
      
